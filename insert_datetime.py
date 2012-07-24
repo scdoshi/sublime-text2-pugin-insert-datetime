@@ -10,21 +10,9 @@ class insertDatetimeCommand(sublime_plugin.TextCommand):
     elif format == "ymdhms":
         # %X = %H:%M:%S
         timestamp = timestamp.strftime("%Y-%m-%d %X")
-    else: # format == "xxx"
-        # 2012-02-18 13:17:28.047000
-        #timestamp = datetime.datetime.now().isoformat(' ')
-        # Sat Feb 18 13:20:41 2012
-        #timestamp = datetime.datetime.now().ctime()
-
-        # 数字变为字符串 str(xx),字符串变为数字 int(string)
-        timestamp = int(timestamp.strftime("%w"))
-        week = {
-            1 : "一", 2 : "二", 3 : "三", 4 : "四", 5 : "五", 6 : "六", 7 : "日"
-        }
-
-        timestamp = "星期" + week[timestamp]
-        ## 中文要指定: coding=utf-8 | gbk ，再decode
-        timestamp = timestamp.decode("utf-8")
+    elif format == "ymdhm":
+        # yyyy-mm-dd_hh-mm
+        timestamp = timestamp.strftime("%Y-%m-%d_%H-%M")
 
     #for region in the selection
     for r in self.view.sel():
